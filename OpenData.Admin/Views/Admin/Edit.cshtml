@@ -1,0 +1,77 @@
+﻿@model OpenData.Domain.Entities.OpenDataSet
+
+@{
+    ViewBag.Title = "Admin: Редактирование " + @Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h1>Edit @Model.Name</h1>
+    @using (Html.BeginForm("Edit","Admin", 
+        FormMethod.Post, new { enctype = "multipart/form-data" })) {
+        <fieldset>
+        <legend>@Model.Name</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ODID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ODID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.FullDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FullDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AuthorityID, "ОИГВ")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AuthorityID", String.Empty)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CategoryID, "Категория")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CategoryID", String.Empty)
+        </div>
+
+       
+    </fieldset>
+       
+        <div class="editor-label">Image</div>
+        <div class="editor-field">
+        @*@if (Model.ImageData == null) {
+        @:None
+        } else {
+        <img width="150" height="150"
+        src="@Url.Action("GetImage", "OpenDataSet", new { Model.ODID })" />
+        }
+        <div>Upload new image: <input type="file" name="Image" /></div>*@
+        </div>
+        @*<div class="editor-label">CSV-файл</div>
+        <div class="editor-field">
+            <div>Загрузка CSV-файла: <input type="file" name="CSVFile" /></div>
+        </div>*@
+    <input type="submit" value="Save" />
+    @Html.ActionLink("Отменить и вернуться в список", "Index")
+    }
+
+@* @Html.DropDownListFor(x=>x.INN.INN,(IEnumerable<SelectListItem>)ViewData["Authorities"],"Authorities" )
+ @Html.DropDownListFor(x=>x.Authority.INN,(IEnumerable<SelectListItem>)ViewData["Authorities"],"Authorities"  )
+*@

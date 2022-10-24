@@ -1,0 +1,34 @@
+﻿@model IEnumerable<OpenData.Domain.Entities.OpenDataSet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+    <table class="Grid">
+        <tr>
+            <th>Идентификатор</th>
+            <th>Наименование</th>
+            <th>ОИГВ</th>
+            <th>Описание</th>
+            <th>Опубликован</th>
+            <th>Редактировать</th>
+            <th>Опубликовать/Снять с публикации</th>
+            
+        </tr>
+        @foreach (var item in Model) {
+        <tr>
+            <td>@item.ODID</td>
+            <td>@item.Name</td>
+            <td>@Html.DisplayFor(x=>item.Authority.Name)</td>
+            <td>@item.Description</td>
+            @*<td> @using (Html.BeginForm("Delete", "Admin")) {@Html.Hidden("ODID", item.ODID) <input type="submit" value="Удалить"/> } </td>*@
+            <td>@if (item.IsPublished) { <text>Опубликован</text> } else { <text>Не опубликован</text> } </td>
+            <td>@Html.ActionLink("Редактировать атрибуты", "Edit", new { item.ODID })</td>
+            <td>@if (item.IsPublished) {@Html.ActionLink("Снять с публикации", "PubUnpub", new { item.ODID }) } else { @Html.ActionLink("Опубликовать", "PubUnpub", new { item.ODID })}</td>
+            
+        </tr>
+        }
+    </table>
+<p>@Html.ActionLink("Добавить новый набор данных", "CreatePass")</p>
+

@@ -1,0 +1,48 @@
+﻿@model OpenData.Admin.Models.LoadSetModel
+
+@{
+    
+    ViewBag.Title = "Загрузка набора данных и структуры";
+    Layout = null;
+    <link href="~/Content/Admin.css" rel="stylesheet" />
+}
+ <h3>Загрузка набора данных и/или структуры для @Html.DisplayFor(m=>m.ODID)</h3>
+@*<h2>@Model.ODID</h2> @Model.ReturnUrl*@
+ @ViewData["message"]
+ @using (Html.BeginForm("LoadSet","Operator", 
+        FormMethod.Post, new { enctype = "multipart/form-data" })) {
+        @Html.HiddenFor(x => x.ODID);
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <div class="editor-label">
+            Причина загрузки
+        </div>
+        <div class="editor-field">
+            @if (ViewBag.ReasonInit != null)
+            { <text>Загрузка первоначального набора данных и структуры</text>
+                <input type="hidden" name="ReasonID" value=@ViewBag.ReasonID/> 
+            }
+            else
+            {
+                @Html.DropDownList("ReasonID", String.Empty)
+            }
+        </div>
+     
+       
+        <input Name="ScemeMimeType" type="hidden" id="SchemeMimeType" value="text/csv"/>
+        <div class="editor-label">Файл структуры</div>
+        <div class="editor-field">
+        <div>Загрузка файла структуры: <input type="file" name="StrCsv" id="StrCsv" /></div>
+        </div>
+        <input Name="CsvMimeType" type="hidden" id="CsvMimeType" value="text/csv"/>
+        <div class="editor-label">CSV-файл</div>
+        <div class="editor-field">
+        <div>Загрузка файла набора данных: <input type="file" name="VerCsv" id="VerCsv" /></div>
+
+        </div>
+    <input type="submit" value="Загрузить" />
+   
+    }
+ @Html.ActionLink("Отменить и вернуться в список","Index", "Operator")
+
+
+ 

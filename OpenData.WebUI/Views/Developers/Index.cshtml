@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DevelopersLayout.cshtml";
+}
+<aside id="filtersAside" class="left medium-3 columns">
+      
+        <div class="navbar-example" style="position:fixed;">
+             <ul class="nav">
+                 <li><a href="#OData">Поддержка OData</a></li>
+                 <li><a href="#apiVersion">Версия API</a></li>
+                 <li><a href="#datasetsList">Список наборов данных</a></li>
+                 <li><a href="#datasetPassport">Паспорт набора данных</a></li>
+             </ul>
+
+         </div>
+        
+       
+           
+
+        
+        
+    </aside>
+<div id="datasetsDiv" class="medium-9 columns">
+<h3 id="OData">Поддержка OData</h3>
+        <section>
+            
+            <p>
+                Настоящая версия API реализована с частичной поддержкой протокола <b>Open Data Protocol (OData)</b>.
+                Более подробно с описанием протокола Вы можете ознакомиться на сайте <a href="http://www.odata.org/" target="_blank">http://www.odata.org/</a>.
+                Указанные ниже параметры протокола OData поддерживаются всеми ресурсами данной версии API. Они являются необязательными, однако их использование может значительно упростить работу с API Портала.
+            </p>
+            <h5>Параметры:</h5>
+            <table>
+                <thead>
+                    <tr><th>Параметр</th><th>Тип</th><th>Описание</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><var>$top</var></td><td>number</td><td>Ограничивает количество возвращаемых записей. По умолчанию выводятся все записи.</td></tr>
+                    <tr><td><var>$skip</var></td><td>number</td><td>Позволяет указать количество записей, которые следует пропустить в ответе. По умолчанию выводятся все записи. </td></tr>
+                    <tr><td><var>$inlinecount</var></td><td>string</td><td>Принимает значение <q>allpages</q> для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится</td></tr>
+                    <tr><td><var>$orderby</var></td><td>string</td><td>Указывает поле для сортировки результирующего списка. <br />Пример: <var>$orderby</var> = <q>Caption</q>, <var>$orderby</var> = <q>Number desc</q>.</td></tr>
+                    
+                </tbody>
+            </table>
+        </section>
+<h3 id="apiVersion">Версия API</h3>
+        <section>
+            <p>
+                В ссылках на все ресурсы API Портала открытых данных Вологодской области должна содержаться информация об используемой версии в формате <code>http://api.opendata.gov35.ru/v{version}</code>.
+                Номер текущей версии можно узнать при помощи запроса, указанного ниже.
+            </p>
+            <h5>Запрос:</h5>
+            <samp>GET <b>http://api.opendata.gov35.ru/version</b></samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('{ "Version": 1 }'), null, 4) + "</samp>");</script>
+            @*<script type="text/javascript">document.write("<code>" + "<string>Version: 1</string> " + "</code>");</script>*@
+            <p>Таким образом, базовый URL для всех ресурсов в текущей версии API &mdash; <code>http://api.opendata.gov35.ru/v1/</code>.</p>
+        </section>
+        <h3 id="datasetsList">Список наборов данных</h3>
+        <section>
+            <p>Запрос к ресурсу <code>/list</code> возвращает список наборов данных.</p>
+            <h5>Запрос:</h5>
+            <samp>GET http://api.opendata.gov35.ru/v1/list?$skip=10&$top=5 </samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('[{"ID":"3525057122-TreasuryNotTransm","Caption":"Имущество казны Вологодской области, не переданное юридическим лицам","Description":"Имущество казны Вологодской области, не переданное юридическим лицам","Category":{"ID":6,"Name":"Земля и имущество"},"Owner":{"INN":3525057122,"Name":"Департамент имущественных отношений"}},{"ID":"3525057122-TreasuryRental","Caption":"имущество казны, переданное в аренду","Description":"имущество казны, переданное в аренду","Category":{"ID":6,"Name":"Земля и имущество"},"Owner":{"INN":3525057122,"Name":"Департамент имущественных отношений"}},{"ID":"3525093804-Cinemadata","Caption":"Открытые данные по организациям кинообслуживания Вологодской области","Description":"Данные содержат информацию об основных показателях деятельности организаций кинообслуживания Вологодской области","Category":{"ID":7,"Name":"Культура"},"Owner":{"INN":3525093804,"Name":"Департамент культуры"}},{"ID":"3525093804-Clubdata","Caption":"Открытые данные по учреждениям культурно-досугового типа Вологодской области","Description":"Данные содержат информацию об основных показателях деятельности учреждений культурно-досугового типа Вологодской области","Category":{"ID":7,"Name":"Культура"},"Owner":{"INN":3525093804,"Name":"Департамент культуры"}},{"ID":"3525093804-CultureInstitutions","Caption":"Открытые данные по сети учреждений культуры Вологодской области","Description":"Данные содержат информацию о сети учреждений культуры Вологодской области","Category":{"ID":7,"Name":"Культура"},"Owner":{"INN":3525093804,"Name":"Департамент культуры"}}]'), null, 4) + "</samp>");</script>
+            <h5>Формат возвращаемого объекта</h5>
+            <p>Ответ содержит массив элементов следующего формата:</p>
+            <ul>
+                <li><code>Id</code> &mdash; <span>Идентификатор набора данных</span></li>
+                <li><code>Caption</code> &mdash; <span>Наименование набора данных</span></li>
+                <li><code>Description</code> &mdash; <span>Описание набора данных</span></li>
+                <li><code>Category</code> &mdash; <span>Категория :</span>
+                    <ul>
+                        <li><code>ID</code> &mdash; <span>Идентификатор категории</span></li>
+                        <li><code>Name</code> &mdash; <span>Наименование категории</span></li>
+                    </ul>
+                 </li>
+                 <li><code>Owner</code> &mdash; <span>Владелец набора данных :</span>
+                    <ul>
+                        <li><code>INN</code> &mdash; <span>ИНН ОИГВ &mdash; владельца</span></li>
+                        <li><code>Name</code> &mdash; <span>Наименование ОИГВ &mdash; владельца</span></li>
+                    </ul>
+                  </li>
+            </ul>
+        </section>
+
+        <h3 id="datasetPassport" class="key">Паспорт набора данных</h3>
+        <section>
+            <p>Запрос к ресурсу <code>/passport/{id}</code> возвращает описание набора данных с указанием перечня атрибутов.</p>
+            <h5>Запрос:</h5>
+            <samp>GET http://api.opendata.gov35.ru/v1/passport/ </samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('[{"ID":"3525057122-TreasuryNotTransm","Name":"TreasuryNotTransm","Description":"Имущество казны Вологодской области, не переданное юридическим лицам","Caption":"Имущество казны Вологодской области, не переданное юридическим лицам","Owner":{"INN":3525057122,"Name":"Департамент имущественных отношений"},"Category":{"ID":6,"Name":"Земля и имущество"},"Responsible":{"SNP":"Рожина Светлана Николаевна","Duty":"Главный специалист","Phone":"56-37-36","Email":"dio@gov35.ru"}}]'), null, 4) + "</samp>");</script>
+            <h5>Формат возвращаемого объекта</h5>
+            <p>Ответ содержит один элемент следующего формата:</p>
+            <ul>
+                <li><code>Id</code> &mdash; <span>Идентификатор набора данных</span></li>
+                <li><code>Caption</code> &mdash; <span>Наименование набора данных</span></li>
+                <li><code>Description</code> &mdash; <span>Описание набора данных</span></li>
+                <li><code>Category</code> &mdash; <span>Категория :</span>
+                    <ul>
+                        <li><code>ID</code> &mdash; <span>Идентификатор категории</span></li>
+                        <li><code>Name</code> &mdash; <span>Наименование категории</span></li>
+                    </ul>
+                 </li>
+                 <li><code>Owner</code> &mdash; <span>Владелец набора данных :</span>
+                    <ul>
+                        <li><code>INN</code> &mdash; <span>ИНН ОИГВ &mdash; владельца</span></li>
+                        <li><code>Name</code> &mdash; <span>Наименование ОИГВ &mdash; владельца</span></li>
+                    </ul>
+                  </li>
+                 <li><code>Responsible</code> &mdash; <span>Ответственное лицо :</span>
+                    <ul>
+                        <li><code>SNP</code> &mdash; <span>Фамилия, имя, отчество</span></li>
+                        <li><code>Duty</code> &mdash; <span>Должность</span></li>
+                        <li><code>Phone</code> &mdash; <span>Телефон</span></li>
+                        <li><code>Email</code> &mdash; <span>Адрес электронной почты</span></li>
+                    </ul>
+                  </li>
+            </ul>
+        </section>
+
+        @*<h3 id="datasetRows" class="key">Содержимое набора данных</h3>
+        <section>
+            <p>Запрос к ресурсу <code>/datasets/{id}/rows</code> возвращает список строк указанного набора данных.</p>
+            <h5>Запрос:</h5>
+            <samp>GET http://api.data.mos.ru/v1/datasets/658/rows?$top=3&$orderby=Number </samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('[{"Id":"df491220-fc08-4c3d-9958-3e4c8bcc7cd9","Number":1,"Cells":{"VEHICLE_NUM":"Центральная пригородная пассажирская компания","TICKET_NAME":"Билет. Ручная кладь","TICKET_COST":"120.0","VALYDITY":"указанная дата, но не более, чем 10 дней от даты продажи","GLOBALID":"88009217"}},{"Id":"82d4636a-a05a-4c41-8765-32efee2282de","Number":2,"Cells":{"VEHICLE_NUM":"Центральная пригородная пассажирская компания","TICKET_NAME":"Билет. Абонемент ежедневный на 20 дней","TICKET_COST":"693.0","VALYDITY":"1 месяц","GLOBALID":"88009223"}},{"Id":"865b08d4-8f1e-414b-a35c-b943556876c6","Number":3,"Cells":{"VEHICLE_NUM":"Центральная пригородная пассажирская компания","TICKET_NAME":"Билет. Абонемент рабочего дня на 10 дней","TICKET_COST":"292.0","VALYDITY":"1 месяц","GLOBALID":"88009233"}}]'), null, 4) + "</samp>");</script>
+            <h5>Формат возвращаемого объекта</h5>
+            <p>Ответ содержит массив элементов следующего формата:</p>
+            <ul>
+                <li><code>Id</code> &mdash; <span>Идентификатор строки данных в формате GUID</span></li>
+                <li><code>Number</code> &mdash; <span>Порядковый номер строки данных</span></li>
+                <li><code>Cells</code> &mdash; <span>Объект, содержащий значения атрибутов для данной строки</span></li>
+            </ul>
+        </section>*@
+    </div>

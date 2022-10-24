@@ -1,0 +1,93 @@
+﻿@model IEnumerable<OpenData.WebUI.Models.MapsModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MapsLayout.cshtml";
+    //Dictionary<string,int> categories = TempData["Categories"] as Dictionary<string,int>;
+    //Dictionary<string, int> datasets = TempData["Datasets"] as Dictionary<string, int>;
+    //TempData.Keep();
+    
+}
+
+<aside  id="filtersAside" class="left medium-3 columns">
+         <b>Нет наборов с геоданными   </b>
+    @* @using (Ajax.BeginForm("GetMap","Maps",new AjaxOptions
+                        {
+                           HttpMethod="GET",
+                           InsertionMode= InsertionMode.Replace,        
+                           UpdateTargetId = "MapContainer"
+                        }))
+                        {
+foreach (var item in @Model)
+{
+    <ul>
+        @if (item.Count!=0)
+        {  
+            
+           <li class="MapCategory" style="cursor:pointer">@item.CategoryName (@item.Count) </li>
+        }
+       <div class="MapDatasets invisible">
+            @foreach (var ds in item.Datasets)
+            {
+                
+                if (ds.Count != 0)
+                { 
+                    
+                    <input type="checkbox" name="ds" value="@ds.ODID" class="chkDataSet"  /> @ds.Description <text>(@ds.Count)</text>             
+                }
+            }
+        </div>
+    </ul>
+}
+     }*@
+</aside>
+
+
+<div id="MapContainer" style="margin-top:10px;" class="medium-9 columns">
+  <div id="map" style="width:600px;height:400px"></div>
+
+<script type="text/javascript">
+    window.onload = function () {
+        ymaps.ready(function () {
+            // Создание экземпляра карты
+            
+                myMap = new ymaps.Map('map', {
+                    center: [59.224024, 39.883923],
+                    zoom: 12
+                });
+                       
+            // Загрузка YMapsML-файла
+            ymaps.geoXml.load("@ViewBag.ODID")
+                    .then(function (res) {
+                        myMap.geoObjects.add(res.geoObjects    ); // Добавление геообъектов на карту
+                    },
+                    function (error) {   // Вызывается в случае неудачной загрузки YMapsML-файла
+                        alert("При загрузке YMapsML-файла произошла ошибка: " + error);
+                    });
+        });
+    }
+   
+
+</script>  
+
+</div>
+
+
+
+
+@*//@Ajax.ActionLink(item.CategoryName + "(" + item.Count + ")", "GetMap", "Maps",
+                new AjaxOptions
+                {
+                    Url = Url.Action("GetMap", "Maps", new { category = item.CategoryId }),
+                    UpdateTargetId = "MapContainer"
+                },
+                new {@class="MapCategory" }
+
+            ) //
+
+//@Ajax.ActionLink(ds.Description + "("+ds.Count+")","GetMap","Maps",
+                        new AjaxOptions
+                        {
+                            Url=Url.Action("GetMap","Maps", new {Dataset = ds.ODID}),         
+                            UpdateTargetId = "MapContainer"
+                        })//*@

@@ -1,0 +1,4 @@
+field name;english description;russian description;format
+name;Name;Наименование;string
+lon;Longitude;Долгота;double
+lat;Latitude;Широта;double

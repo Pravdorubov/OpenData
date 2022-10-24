@@ -1,0 +1,92 @@
+﻿@model IEnumerable<OpenData.Domain.Entities.OpenDataSet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Все наборы</h1>
+    <table class="Grid">
+        <tr>
+            <th>Идентификатор</th>
+            <th>Наименование</th>
+            <th>ОИГВ</th>
+            <th>Описание</th>
+            <th>Опубликован</th>
+            <th>Редактировать</th>
+            <th>Опубликовать/Снять с публикации</th>
+            <th>Загрузить набор</th>
+        </tr>
+        @foreach (var item in Model) {
+        <tr>
+            <td>@item.ODID</td>
+            <td>@item.Name</td>
+            <td>@Html.DisplayFor(x=>item.Authority.Name)</td>
+            <td>@item.Description</td>
+            @*<td> @using (Html.BeginForm("Delete", "Admin")) {@Html.Hidden("ODID", item.ODID) <input type="submit" value="Удалить"/> } </td>*@
+            <td>@if (item.IsPublished) { <text>Опубликован</text> } else { <text>Не опубликован</text> } </td>
+            <td>@Html.ActionLink("Редактировать атрибуты", "Edit", new { item.ODID })</td>
+            <td>@if (item.IsPublished) {@Html.ActionLink("Снять с публикации", "PubUnpub", new { item.ODID }) } else { @Html.ActionLink("Опубликовать", "PubUnpub", new { item.ODID })}</td>
+            <td>@Html.ActionLink("Загрузить набор", "LoadSet", new { item.ODID })</td>
+        </tr>
+        }
+    </table>
+<p>@Html.ActionLink("Добавить новый набор данных", "CreatePass")</p>
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.INN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConnectionString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QueryString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.INN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConnectionString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QueryString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { ODID=item.ODID }) |
+            @Html.ActionLink("Details", "Details", new { ODID=item.ODID }) |
+            @Html.ActionLink("Delete", "Delete", new { ODID=item.ODID })
+        </td>
+    </tr>
+}
+
+</table>*@

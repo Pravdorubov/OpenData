@@ -1,0 +1,64 @@
+﻿ @*<div id="table" style="display: none" data-bind="if: viewMode() === 'table', css: { loading: loading }">*@
+<div id="table" style="/*display: none*/" data-bind="if: viewMode() === 'table', css: { loading: loading }">
+<div class="row dataset-toolbar">
+    <div class="small-5 columns">
+        <a class="arrow left" data-bind="fadeVisible: showArrows" onclick="scrollTable(-100)" href="javascript:void(0);"></a>
+        <label for="pageSize">Показывать по: </label>
+        <select id="pageSize" data-bind="value: pageSize">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+        </select>
+    </div>
+    <div class="small-7 columns text-right">
+        <label for="searchField">Поиск:</label>
+        <input id="searchField" data-bind="value: search, valueUpdate: 'afterkeydown'" />
+        <a class="arrow right" data-bind="fadeVisible: showArrows" onclick="scrollTable(100)" href="javascript:void(0);"></a>
+    </div>
+</div>
+<div class="row dataset-bottombar-container">
+        <div class="dataset-bottombar">
+            <div class="medium-6 columns pager">
+                <ul id="pager"></ul>
+            </div>
+            <div class="medium-6 columns counter">
+                <label>Строки: <span data-bind="text: pageSize() * (pageNumber() - 1) + 1"></span>&mdash; <span data-bind="    text: pageSize() * pageNumber() > count() ? count() : pageSize() * pageNumber()"></span>&nbsp;из <span data-bind="    text: count"></span></label>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="geodata" style="display: none" data-bind="if: viewMode() === 'map'">
+            <iframe id="map" src="http://eatlas.mos.ru/?x=37.626309924818024&y=55.75825708486364&z=3&lang=ru&l=[81]&maponly" style="width: 100%; max-height: 600px; min-height: 600px"></iframe>
+    </div>
+<div style="display: none" id="developers" data-bind="if: viewMode() === 'developers'">
+                
+    <div class="row">
+        <ul class="listview">
+            <li class="row header">
+                <div class="small-8 columns">Ссылка</div>
+                <div class="small-4 columns text-center">Формат</div>
+            </li>
+            <li>
+                <div class="small-8 columns">
+                    <span><a href="/datasets/download/501/1/1" >Аптеки</a></span>
+                </div>
+                <div class="small-4 columns text-center">
+                    <span>csv</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+                
+</div>
+<div style="display: none" id="docs" data-bind="if: viewMode() === 'docs'">
+                
+    <div class="row">
+        <ul class="listview">
+            <li class="row header">
+                <div class="small-8 columns">Ссылка</div>
+                <div class="small-4 columns text-center">Формат</div>
+            </li>
+
+        </ul>
+    </div>
+</div>

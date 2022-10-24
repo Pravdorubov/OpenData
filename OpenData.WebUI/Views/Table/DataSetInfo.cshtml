@@ -1,0 +1,63 @@
+﻿@*@model OpenData.Domain.Entities.OpenDataSet*@
+@model OpenData.WebUI.Models.PassViewModel
+
+<section>
+    <dl>
+        <dt>Идентификационный номер:</dt>
+        <dd>@Model.ODID</dd>
+        
+        <dt>Описание:</dt>
+        <dd>@Model.Description</dd>
+
+        <dt>Описание:</dt>
+        <dd>@Model.FullDescription</dd>
+
+        <dt>Владелец:</dt>
+        <dd>@Model.Authority</dd>
+
+        <dt>Ответственное лицо:</dt>
+        <dd>@Model.UserSNP</dd>
+
+        <dt>Телефон ответственного лица:</dt>
+        <dd>@Model.UserPhone</dd>
+
+        <dt>Адрес электронной почты ответственного лица:</dt>
+        <dd>@Model.UserEmail</dd>
+
+        <dt>Гиперссылка на набор данных:</dt>
+        <dd><a href="downloads/@Model.DataSetLink">@Model.DataSetLink </a></dd>
+
+        <dt>Формат данных:</dt>
+        <dd>CSV</dd>
+
+        <dt>Описание структуры:</dt>
+        <dd><a href="downloads/@Model.StructureLink">@Model.StructureLink</a></dd>
+
+        <dt>Дата первой публикации набора данных:</dt>
+        <dd>@Model.FirstDate</dd>
+
+        <dt>Дата последнего внесения изменений:</dt>
+        <dd>@Model.LastDate</dd>
+
+        <dt>Содержание последнего внесения изменения:</dt>
+        <dd>@Model.Reason</dd>
+
+        <dt>Ключевы слова:</dt>
+        <dd>@Model.KeyWords</dd>
+
+        <dt>Поделиться:</dt>
+        <dd>
+            <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+            <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,lj,gplus"  data-yashareImage="http://212.45.30.107/api/datasets/Image/501"></div>
+        </dd>
+        @*<dt style="cursor: pointer;" onclick="$('#addTagsSection').toggle();">
+            <a>Добавить тэги</a>
+        </dt>
+
+        <dd id="addTagsSection" style="display: none;">
+            <textarea placeholder="Введите тэги для датасета" id="tags" name="tags" data-bind="value: app.datasetTags.tags"></textarea>
+            <button class="sendButton" data-bind="click: app.datasetTags.addTags">Отправить</button>
+        </dd>*@
+        <br />
+    </dl>
+</section>

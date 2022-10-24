@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Admin.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <div>
+        @if (TempData["message"] != null) {
+            <div class="Message">@TempData["message"]</div>
+        }
+         @RenderBody()
+    </div>
+    
+       
+     <span class="LogOff">@Html.ActionLink("Выйти","LogOff", "Account") </span>
+    
+   
+    <div id="DataSets">
+        <fieldset>
+            <legend>Наборы данных</legend>
+            @{ Html.RenderAction("DataSets", "Operator"); }
+        </fieldset>
+    </div>
+    
+    @*<div id="Profile">
+        <fieldset>
+            <legend>Профиль</legend>
+             @{ Html.RenderAction("Profile", "Operator"); }
+        </fieldset>
+    </div>    *@
+
+    <div id="Messages">
+        <fieldset>
+            <legend>Сообщения</legend>
+        </fieldset>
+    </div> 
+
+</body>
+</html>

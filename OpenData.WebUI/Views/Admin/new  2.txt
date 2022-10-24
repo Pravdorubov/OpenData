@@ -1,0 +1,44 @@
+$(function () {
+        var map;
+
+        $('form').submit(function (e) {
+            e.preventDefault();
+
+            $.ajax('http://geocode-maps.yandex.ru/1.x/', {
+                data : {
+                    "geocode" : $('input').val(),
+                    "format" : "json"
+                },
+                dataType : 'jsonp',
+                success : function (json) {
+                    var results = json.response.GeoObjectCollection.featureMember;
+
+                    createMap($('#map'));
+                    showResultsOnMap(results);
+                }
+            });
+        });
+
+        function createMap(container) {
+            container.show();
+            map = new ymaps.Map(container.get(0), {
+                center: [55.755773, 37.617761],
+                zoom: 9
+            });
+        }
+
+        function showResultsOnMap(results) {
+            results.forEach(function (result) {
+                var geoObject = result.GeoObject,
+                    point = geoObject.Point.pos.split(' ').reverse(),
+                    text = geoObject.metaDataProperty.GeocoderMetaData.text;
+
+                map.geoObjects.add(
+                    new ymaps.Placemark(point, {
+                        balloonContentBody: text
+                    })
+                );
+            });
+            map.setBounds(map.geoObjects.getBounds());
+        }
+    });

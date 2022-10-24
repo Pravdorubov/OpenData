@@ -1,0 +1,80 @@
+﻿@*@model OpenData.Domain.Entities.OpenDataSet*@
+@model OpenData.WebUI.Models.DataSetListView
+@{
+    string linkToCSV = Model.DataSet.ODID + ".csv";
+}
+
+@*<div class="item">
+   
+</div>*@
+ 
+@if (ViewBag.Num % 2 == 0)
+{
+    <text><tr class="even"></text>
+}
+else
+{
+    <text><tr class="odd"></text>
+}
+
+
+<td>@ViewBag.Num</td>
+    <td>@if (Model.DataSet.Category.ImageData != null)
+    { 
+       <img width="32" height="32" src="@Url.Action("GetImage","OpenDataSet",new {Model.DataSet.ODID})"/> 
+        @*<div style="float:left;margin-right:20px" > 
+            
+        </div>*@
+    }
+    </td>
+    <td class="name">
+    @Model.DataSet.Description
+    </td>
+    <td>
+    @Model.DataSet.Category.Name
+    </td>
+    <td>
+    @Model.DataSet.Authority.Name
+    </td>
+   @* <td>
+    @Html.DisplayFor(pub=>pub.IsPublished)
+    </td>*@
+    <td>
+   
+
+@*    @helper LinkToCSV(string linkCSV)
+ {
+    <a href="~/CSV/@linkCSV"+".cs">Скачать csv-файл </a> 
+ }
+
+  @LinkToCSV(Model.ODID)
+
+
+@helper Email(string address, string name = null)
+ {
+   <a href="mailto:@(address)">@(name ?? address)</a>  
+ }
+
+ и используем @Email("google@gmail.ru")*@
+
+    <a class="btn mini" href="@Model.Path">Скачать csv-файл </a> 
+
+    @*@using (Html.BeginForm("ViewCSV", "Table")) {
+        @Html.HiddenFor(x => x.ODID)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+       
+        
+        
+        <input type="submit" value="Cкачать csv-файл" />
+    }*@
+        
+   @* @using (Html.BeginForm("Index", "Table" ))
+    {
+        @Html.HiddenFor(x => x.ODID)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" class="btn mini" value="Просмотреть как таблицу" />
+    }*@
+    
+        @Html.ActionLink("Просмотреть","Index","Table",new { odid = Model.DataSet.ODID },new {@class="btn mini"})
+        </td>
+</tr>

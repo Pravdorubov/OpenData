@@ -1,0 +1,103 @@
+﻿
+@using (Html.BeginForm("GetError","Table", 
+        FormMethod.Post, new { enctype = "multipart/form-data" })) {
+<div id="requestCreation" class="requestCreation">
+    <img src=/img/closeform.png class="closeButton" onclick="hideCommentWind();">
+    <input type="hidden" name="ODID" value=@ViewBag.ODID />
+    <div class="requestHead">Обращение</div>
+    <div class="commentBody">
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Проблема </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                        <select type="text" name="problem" >
+                            <option>Некорректность значений атрибутов объекта в наборе данных</option>    
+                            <option>Отсутствие существующего объекта в наборе данных</option>    
+                            <option>Наличие отсутствующего объекта в наборе данных</option>    
+                        </select>
+
+            
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Набор данных </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <span class="withBackgroundColor">@ViewBag.Description</span>
+            </div>
+        </div>
+        <div class="row" data-bind="visible: problem() != 'data_1'">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Строка № </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <span id="row" name="row" class="withBackgroundColor" ></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Фамилия <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input type="text" name="surname"   />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Имя <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input type="text" name="name"  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Отчество <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input type="text" name="patronimic" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Email <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input type="email" name="email"  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Телефон </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input type="tel" name="phone"  />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Обращение <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <textarea name="body"  ></textarea>
+            </div>
+        </div>
+    </div>
+
+
+
+                <div class="requestFoot" style="width:100%">
+                    <span class="asterisk">*</span> - обязательно для заполнения
+                </div>
+
+
+
+    <div class="commentButtons">
+        <input class="cancelButton" type="reset" value="Отмена" />
+        <input class="sendButton" type="submit" value="Отправить" />
+    </div>
+</div>
+}

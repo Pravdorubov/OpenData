@@ -1,0 +1,14 @@
+{
+	"sLengthMenu": "Показать _MENU_ записей",
+	"sZeroRecords": "К сожадению ничего не найдено",
+	"sInfo": "Показано _START_ - _END_ из _TOTAL_ записей",
+	"sInfoEmpty": "Показано 0 - 0 из 0 записей",
+	"sInfoFiltered": "( Всего _MAX_ записей )",
+	"sSearch": "Поиск:",
+	"oPaginate": {
+		"sFirst": "В начало",
+		"sLast": "В конец",
+		"sNext": "Вперёд",
+		"sPrevious": "Назад"
+	}
+}

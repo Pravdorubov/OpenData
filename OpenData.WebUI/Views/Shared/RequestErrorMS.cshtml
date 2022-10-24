@@ -1,0 +1,99 @@
+﻿<!-- ko with: app.request -->
+
+
+<div id="requestCreation" class="requestCreation">
+    <img src=/img/closeform.png class="closeButton" onclick="hideCommentWind();">
+    <div class="requestHead">Обращение</div>
+    <div class="commentBody">
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Проблема </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                        <select data-bind="options: problems, optionsText: 'name', optionsValue: 'caption', value: problem"></select>
+
+            
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Набор данных </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <span class="withBackgroundColor" data-bind="text: datasetCaption"></span>
+            </div>
+        </div>
+        <div class="row" data-bind="visible: problem() != 'data_1'">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Строка № </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <span class="withBackgroundColor" data-bind="text: datasetrowNumber"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Фамилия <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input data-bind="value: userSurname, valueUpdate: 'afterkeydown'" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Имя <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input data-bind="value: userName, valueUpdate: 'afterkeydown'" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Отчество <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input data-bind="value: userPatronymic, valueUpdate: 'afterkeydown'"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Email <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input data-bind="value: userEmail, valueUpdate: 'afterkeydown'" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Телефон </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <input data-bind="value: userPhone, valueUpdate: 'afterkeydown'" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="small-11 small-centered medium-uncentered medium-4 columns">
+                <span> Обращение <span class="asterisk">*</span> </span>
+            </div>
+            <div class="small-11 small-centered  medium-uncentered medium-8 columns">
+                <textarea data-bind="value: comment, valueUpdate: 'afterkeydown'" ></textarea>
+            </div>
+        </div>
+    </div>
+
+
+
+                <div class="requestFoot" style="width:100%">
+                    <span class="asterisk">*</span> - обязательно для заполнения
+                </div>
+
+
+
+    <div class="commentButtons">
+        <div class="cancelButton" onclick="hideCommentWind();">Отменить</div>
+        <div class="sendButton" data-bind="click: send">Отправить</div>
+    </div>
+</div>
+
+<!-- /ko -->

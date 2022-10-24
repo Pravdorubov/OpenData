@@ -1,0 +1,35 @@
+﻿@model OpenData.Domain.Entities.User
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("EditProfile","SuperAdmin", FormMethod.Post))
+    {
+        <div class="editor-label" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Login)
+        </div>
+        <div class="dispay"> 
+            @Html.DisplayFor(model => model.Login)
+        </div>
+        <div class="editor-label" style="font-weight:bold">
+            @Html.LabelFor(model => model.UserProfile.FNS)
+        </div>
+        <div class="dispay"> 
+            @Html.DisplayFor(model => model.UserProfile.FNS)
+        </div>
+        <div class="editor-label" style="font-weight:bold">
+            @Html.LabelFor(model => model.UserProfile.Duty)
+        </div>
+        <div class="dispay"> 
+            @Html.DisplayFor(model => model.UserProfile.Duty)
+        </div>
+        <div class="editor-label" style="font-weight:bold">
+            @Html.LabelFor(model => model.UserProfile.Email)
+        </div>
+        <div class="dispay"> 
+            @Html.DisplayFor(model => model.UserProfile.Email)
+        </div>
+        <input type="submit" value="Изменить профиль" />
+        
+    }

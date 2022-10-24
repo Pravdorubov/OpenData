@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DevelopersLayout.cshtml";
+}
+
+
+@{Html.RenderAction("Index", "Help", new { area = "HelpPage" });}
+
+
+@*<h3 id="apiVersion">Версия API</h3>
+        <section>
+            <p>
+                В ссылках на все ресурсы API Портала открытых данных города Москвы должна содержаться информация об используемой версии в формате <code>http://api.data.mos.ru/v{version}</code>.
+                Номер текущей версии можно узнать при помощи запроса, указанного ниже.
+            </p>
+            <h5>Запрос:</h5>
+            <samp>GET <b>http://api.data.mos.ru</b></samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('{ "Version": 1 }'), null, 4) + "</samp>");</script>
+            <p>Таким образом, базовый URL для всех ресурсов в текущей версии API &mdash; <code>http://api.data.mos.ru/v1/</code>.</p>
+        </section>
+        <h3 id="apiKeys">Использование API-ключа</h3>
+        <section>
+            <p>
+                Запрос к ресурсам, помеченным значком <img src="/Content/Images/key.png" alt="Ключ" />, доступен только зарегистрированным разработчикам.
+                Ключ передаётся в строке запроса в формате &mdash; <code>?api_key=&lt;ваш ключ&gt;</code>.
+                API-Ключ можно посмотреть в настройках профиля.
+            </p>
+        </section>
+        <h3 id="datasetsList">Список наборов данных</h3>
+        <section>
+            <p>Запрос к ресурсу <code>/datasets</code> возвращает список наборов данных.</p>
+            <h5>Запрос:</h5>
+            <samp>GET http://api.data.mos.ru/v1/datasets?$skip=10&$top=5&$inlinecount=allpages </samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('{"Count":222,"Items":[{"Id":507,"CategoryId":3,"DepartmentId":3,"Caption":"Диспансеры"},{"Id":508,"CategoryId":3,"DepartmentId":3,"Caption":"Дома ребенка"},{"Id":509,"CategoryId":3,"DepartmentId":3,"Caption":"Женские консультации"},{"Id":510,"CategoryId":3,"DepartmentId":3,"Caption":"Санатории"},{"Id":512,"CategoryId":3,"DepartmentId":3,"Caption":"Молочные кухни"}]}'), null, 4) + "</samp>");</script>
+            <h5>Формат возвращаемого объекта</h5>
+            <p>Ответ содержит массив элементов следующего формата:</p>
+            <ul>
+                <li><code>Id</code> &mdash; <span>Идентификатор набора данных</span></li>
+                <li><code>CategoryId</code> &mdash; <span>Идентификатор тематической категории, которой соответствует набор данных</span></li>
+                <li><code>DepartmentId</code> &mdash; <span>Идентификатор департамента, ответственного за набор данных</span></li>
+                <li><code>Caption</code> &mdash; <span>Наименование набора данных</span></li>
+            </ul>
+        </section>
+
+        <h3 id="datasetPassport" class="key">Паспорт набора данных</h3>
+        <section>
+            <p>Запрос к ресурсу <code>/datasets/{id}</code> возвращает описание набора данных с указанием перечня атрибутов.</p>
+            <h5>Запрос:</h5>
+            <samp>GET http://api.data.mos.ru/v1/datasets/658 </samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('{"Id":658,"CategoryId":13,"CategoryCaption":"Дороги и транспорт","DepartmentId":14,"DepartmentCaption":"Департамент транспорта и развития дорожно-транспортной инфраструктуры города Москвы","Caption":"Тарифы на проезд в городском пассажирском транспорте","Description":"Тарифы на проезд в городском пассажирском транспорте","ContainsGeodata":false,"Columns":[{"Name":"VEHICLE_NUM","Caption":"Вид транспорта","Visible":true},{"Name":"TICKET_NAME","Caption":"Наименование проездного докумета","Visible":true},{"Name":"TICKET_COST","Caption":"Стоимость проездного документа","Visible":true},{"Name":"VALYDITY","Caption":"Срок действия проездного докумета","Visible":true},{"Name":"GLOBALID","Caption":"Глобальный идентификатор","Visible":false}]}'), null, 4) + "</samp>");</script>
+            <h5>Формат возвращаемого объекта</h5>
+            <p>Ответ содержит один элемент следующего формата:</p>
+            <ul>
+                <li><code>Id</code> &mdash; <span>Идентификатор набора данных</span></li>
+                <li><code>CategoryId</code> &mdash; <span>Идентификатор тематической категории</span></li>
+                <li><code>CategoryCaption</code> &mdash; <span>Наименование тематической категории</span></li>
+                <li><code>DepartmentId</code> &mdash; <span>Идентификатор департамента, ответственного за набор данных</span></li>
+                <li><code>DepartmentCaption</code> &mdash; <span>Наименование департамента</span></li>
+                <li><code>Caption</code> &mdash; <span>Наименование набора данных</span></li>
+                <li><code>Description</code> &mdash; <span>Краткое описание набора данных</span></li>
+                <li><code>ContainsGeodata</code> &mdash; <span>Флаг того, что набор данных содержит геоданные</span></li>
+                <li>
+                    <code>Columns</code> &mdash; <span>Перечень атрибутов набора данных. Представлен в виде массива элементов вида:</span>
+                    <ul>
+                        <li><code>Name</code> &mdash; <span>Имя (ключ) атрибута</span></li>
+                        <li><code>Caption</code> &mdash; <span>Описание атрибута</span></li>
+                        <li><code>Visible</code> &mdash; <span>Видимость атрибута</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <h3 id="datasetRows" class="key">Содержимое набора данных</h3>
+        <section>
+            <p>Запрос к ресурсу <code>/datasets/{id}/rows</code> возвращает список строк указанного набора данных.</p>
+            <h5>Запрос:</h5>
+            <samp>GET http://api.data.mos.ru/v1/datasets/658/rows?$top=3&$orderby=Number </samp>
+            <h5>Ответ:</h5>
+            <script type="text/javascript">document.write("<samp>" + JSON.stringify(JSON.parse('[{"Id":"df491220-fc08-4c3d-9958-3e4c8bcc7cd9","Number":1,"Cells":{"VEHICLE_NUM":"Центральная пригородная пассажирская компания","TICKET_NAME":"Билет. Ручная кладь","TICKET_COST":"120.0","VALYDITY":"указанная дата, но не более, чем 10 дней от даты продажи","GLOBALID":"88009217"}},{"Id":"82d4636a-a05a-4c41-8765-32efee2282de","Number":2,"Cells":{"VEHICLE_NUM":"Центральная пригородная пассажирская компания","TICKET_NAME":"Билет. Абонемент ежедневный на 20 дней","TICKET_COST":"693.0","VALYDITY":"1 месяц","GLOBALID":"88009223"}},{"Id":"865b08d4-8f1e-414b-a35c-b943556876c6","Number":3,"Cells":{"VEHICLE_NUM":"Центральная пригородная пассажирская компания","TICKET_NAME":"Билет. Абонемент рабочего дня на 10 дней","TICKET_COST":"292.0","VALYDITY":"1 месяц","GLOBALID":"88009233"}}]'), null, 4) + "</samp>");</script>
+            <h5>Формат возвращаемого объекта</h5>
+            <p>Ответ содержит массив элементов следующего формата:</p>
+            <ul>
+                <li><code>Id</code> &mdash; <span>Идентификатор строки данных в формате GUID</span></li>
+                <li><code>Number</code> &mdash; <span>Порядковый номер строки данных</span></li>
+                <li><code>Cells</code> &mdash; <span>Объект, содержащий значения атрибутов для данной строки</span></li>
+            </ul>
+        </section>*@

@@ -1,0 +1,20 @@
+﻿<section>
+    <ul class="checklist" data-bind="template: { name: 'tree', data: { groupId: null, margin: 0, visNode: true } }"></ul>
+    <script type="text/html" id="tree">
+        <!-- ko foreach: app.dataset.GetColumnsByGroup(groupId) -->
+        <li class="checkbox_container" data-bind="style: { marginLeft: $parent.margin + 'px' }, visible: $parent.visNode">
+            <span class="checkbox" data-bind="css: { checked: visible() }, click: function () { visible(!visible()); }"></span>
+            <label data-bind="text: Caption, click: function () { visible(!visible()); }"></label>
+        </li>
+        <!--/ko-->
+        <!-- ko foreach: app.dataset.GetGroupByParent(groupId) -->
+        <li data-bind="style: { marginLeft: $parent.margin + 'px' }, visible: $parent.visNode">
+            <span data-bind="click: function () { visNode(!visNode()); }, visible: $parent.visNode, style: { marginLeft: ($parent.margin - 15) + 'px' }, text: visNode() ? '&#x25BC;' : '&#x25B6;'" style="float: left; margin-top: -3px; font-size: 12px; cursor: pointer"></span>
+            <span class="checkbox" data-bind="css: { checked: visible() }, click: function () { visible(!visible()); }"></span>
+            <label data-bind="click: function () { visible(!visible()); }"><b data-bind="    text: Name"></b></label>
+            <ul data-bind="template: { name: 'tree', data: { groupId: Id, margin: ($parent.margin + 10), visNode: visNode } }">
+            </ul>
+        </li>
+        <!--/ko-->
+    </script>
+</section>

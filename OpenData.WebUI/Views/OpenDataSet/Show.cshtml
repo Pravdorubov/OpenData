@@ -1,0 +1,207 @@
+﻿@{
+    
+    ViewBag.Title = "Show";
+    Layout = null;
+}
+
+<html>
+  <head>
+   <script src="~/Scripts/jquery-2.0.3.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("input").keyup(function () {
+                var value = $(this).val();
+                var data = {};
+                data.Id = $("#SearchCol1").val();
+                data.
+                //$(".search").each(function(i,e) {
+                //    var inputname = $(e).id;                            
+                //    data[inputname]=$(e).text;
+                //})
+                $.getJSON("/OpenDataSet/Test2",data,getTable)
+            }).keyup();
+        });
+        getTable = function () {
+            alert("q");
+        }
+    </script>
+      <script type="text/javascript">
+        
+          //Для тэгов датасета
+
+          function split(val) {
+              return val.split(/,\s*/);
+          }
+
+          function extractLast(term) {
+              return split(term).pop();
+          }
+
+          $("#tags")
+              // don't navigate away from the field on tab when selecting an item
+              .bind("keydown", function(event) {
+                  if (event.keyCode === $.ui.keyCode.TAB &&
+                      $(this).data("ui-autocomplete").menu.active) {
+                      event.preventDefault();
+                  }
+              })
+              .autocomplete({
+                  minLength: 0,
+                  source: function(request, response) {
+                      // delegate back to autocomplete, but extract the last term
+                      var lastTag = extractLast(request.term);
+                      console.log(lastTag);
+
+                      var arr = [];
+                      var manager = new breeze.EntityManager(app.root + 'api/OpenData/');
+                      var query = new breeze.EntityQuery()
+                          .from("DatasetTagsForUser")
+                          .withParameters({ id: '894' })
+                          .where("Name", "substringof", lastTag.toLowerCase())
+                          .select("Name");
+                      manager.executeQuery(query).then(function(data) {
+                          console.log(data.results.length);
+                          $.each(data.results, function(i, item) {
+                              arr.push(item.Name);
+                          });
+                          response(arr);
+                      }).fail(function(e) {
+                          console.log(e);
+                      });
+                  },
+                  focus: function() {
+                      // prevent value inserted on focus
+                      return false;
+                  },
+                  select: function(event, ui) {
+                      var terms = split(this.value);
+                      // remove the current input
+                      terms.pop();
+                      // add the selected item
+                      terms.push(ui.item.value);
+                      // add placeholder to get the comma-and-space at the end
+                      terms.push("");
+                      this.value = terms.join(", ");
+                      return false;
+                  }
+              });
+
+
+          function changeDisplayMode() {
+              if ($(window).innerWidth() > 1024) {
+                  app.dataset.displayMode(1);
+              } else if ($(window).innerWidth() > 560) {
+                  app.dataset.displayMode(2);
+              } else {
+                  app.dataset.displayMode(3);
+              }
+
+              var container = $(".dataset-bottombar-container"),
+                  bar = $(".dataset-bottombar");
+              bar.width($(".dataset-table-container").width());
+              if (window.innerWidth > 768) {
+                  container.height(36);
+              } else {
+                  container.height(74);
+              }
+              scrollBehavior();
+          }
+
+          var timeout;
+
+          function rowsRendered() {
+              clearTimeout(timeout);
+              timeout = setTimeout(scrollBehavior, 10);
+          }
+
+
+          function scrollBehavior() {
+              var bar = $(".dataset-bottombar"),
+                  footer = $("footer"),
+                  table = $(".dataset-table-container");
+              if (table.offset()) {
+                  if (window.innerHeight + window.pageYOffset < footer.position().top && (table.offset().top - window.pageYOffset < window.innerHeight / 2)) {
+                      bar.addClass("floating");
+                  } else {
+                      bar.removeClass("floating");
+                  }
+              }
+          }
+
+          function scrollTable(val) {
+              $('.dataset-table-scroller').scrollLeft($('.dataset-table-scroller').scrollLeft() + val);
+          }
+
+          $(function() {
+              window.onresize = changeDisplayMode;
+              setTimeout(changeDisplayMode, 100);
+              $('#tags').placeholder();
+              app.dataset.hiddenColumnsCount.subscribe(function() {
+                  scrollBehavior();
+                  setTimeout(function() {
+                      var showArrows = $(".dataset-table").width() > $(".dataset-table-scroller").width();
+                      app.dataset.showArrows(showArrows);
+                      scrollBehavior();
+                  }, 210);
+              });
+
+              app.dataset.visibleDetailsRowsCount.subscribe(function() {
+                  setTimeout(scrollBehavior, 210);
+              });
+
+              $(document).unbind("scroll").scroll(scrollBehavior);
+              //scrollBehavior();
+              setTimeout(function() {
+                  var showArrows = $(".dataset-table").width() > $(".dataset-table-scroller").width();
+                  app.dataset.showArrows(showArrows);
+                  scrollBehavior();
+              }, 210);
+
+              if (location.hash == "#map") app.dataset.viewMode('map');
+              if (location.hash == "#docs") app.dataset.viewMode('docs');
+
+              app.request.foreign(false);
+              app.request.datasetId(894);
+              app.request.datasetCaption('Бассейны плавательные открытые');
+
+              app.dataset.versionNumber(1);
+              app.dataset.releaseNumber(1);
+              app.filterDataset.datasetId(894);
+              app.filterDataset.versionNumber(1);
+              app.filterDataset.releaseNumber(1);
+              app.dataset.load(894, 'ru').done(function() {
+                  app.dataset.loadLinkedDatasets();
+                  app.dataset.loadGroup(894).done(function() {
+                      $.each(app.dataset.columnsGroups(), function(i, item) {
+                          if (item.ParentId == null) {
+                              app.dataset.toggleColumnVisible(item.Id, item.Visible);
+                          }
+                      });
+                      $("#table,#docs,#developers,#geodata").css({
+                          'display': 'block'
+                      });
+                      changeDisplayMode();
+                      app.dataset.loadFiles(894);
+                      ko.applyBindings(app);
+                      if (checkCookieIfUserIsNew() && !app.request.foreign()) {
+                          showPopupDatasetinfoWindow();
+                      }
+
+                      app.datasetTags.foreign(false);
+                      app.datasetTags.datasetId(894);
+                  });
+              });
+          });
+     </script>
+    <style>
+      .selected { color:red; }
+      .highlight { background:yellow; }
+    </style>    
+  </head>
+  <body>
+    <body>
+      <input id="SearchCol1" type="text" value="some text" class="search"/>
+      <p></p>
+    </body>
+</html>
+</html>

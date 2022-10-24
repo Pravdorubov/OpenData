@@ -1,0 +1,29 @@
+﻿<ul class="listview">
+    <li class="row hide-for-small header">
+        <div class="small-1 columns">№</div>
+        <div class="small-11 medium-5 columns">Название</div>
+        <div class="small-11 medium-3 columns">Категория</div>
+        <div class="small-11 medium-3 columns">ОИВ</div>
+    </li>
+        <li class="row odd" data-bind="fadeVisible: (cids().length == 0 || cids.contains(121)) && (oids().length == 0 || oids.contains(121)), css: { even: app.datasetsList.getItemIndex(861) % 2 == 0, odd: app.datasetsList.getItemIndex(861) % 2 > 0 }">
+            <div class="small-1 columns"><span data-bind="text: app.datasetsList.getItemIndex(861)">1</span></div>
+            <div class="small-11 medium-5 columns">
+                <div class="item">
+                    <a href="/datasets/861" class="thumbnail">
+                        
+                        <img src="data:image/png;base64,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" alt="Wi-Fi в парках" />
+                        
+                    </a>
+                    <a href="/datasets/861" class="title">Wi-Fi в парках</a>
+                    <div class="buttons">
+                        <a href="/datasets/download/861" class="btn mini">csv</a>
+                        <a href="/datasets/861" class="btn mini">Таблица</a>
+                        <a href="/datasets/861#map" class="btn mini">Карта</a>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="small-11 small-offset-1 medium-3 medium-offset-0 columns"><a href="/categories/121">Связь</a></div>
+            <div class="small-11 small-offset-1 medium-3 medium-offset-0 columns"><a href="/departments/121">Департамент информационных технологий города Москвы</a></div>
+        </li>
+</ul>

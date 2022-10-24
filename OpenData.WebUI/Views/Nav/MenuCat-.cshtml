@@ -1,0 +1,21 @@
+﻿@*@model IEnumerable<string>*@
+@model IEnumerable<OpenData.Domain.Entities.cat_Category>
+
+@Html.ActionLink("Все категории", "List", "OpenDataSet", new { categoryId = 0 }, new { @class = "menu_head" })
+
+
+
+@foreach (var link in Model)
+{
+  @Html.RouteLink(link.Name, new
+    {
+        controller = "OpenDataSet",
+        action = "List",
+        categoryId = link.ID,
+        authorityID=0,
+        page = 1
+    },
+    new { 
+        @class = link.ID  == ViewBag.SelectedCategory? "selected" :null
+    })
+}

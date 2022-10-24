@@ -1,0 +1,78 @@
+﻿@model OpenData.Admin.Models.CreateUserModel
+
+@{
+    //Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+   
+}
+        @using (Html.BeginForm("CreateAuthorityAdmin","SuperAdmin", FormMethod.Post) )
+        {
+            <fieldset>
+                <legend>Параметры авторизации</legend>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Login)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Login)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Password)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Password)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ConfirmPassword)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ConfirmPassword)
+                </div>
+            </fieldset>
+                
+             <fieldset>
+                 <legend>Профиль</legend>   
+                 <div class="editor-label">
+                    @Html.LabelFor(model => model.FNS)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.FNS)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Duty)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Duty)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Phone)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Phone)
+                </div>
+                
+                 <div class="editor-label">
+                    @Html.LabelFor(model => model.Email)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.AuthorityID, "ОИГВ")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("AuthorityID", String.Empty)
+                </div>
+
+                
+
+       
+            </fieldset>
+            <input type="submit" value="Save" />
+            @Html.ActionLink("Отменить и вернуться в список", "Index")
+        }
+ 
+

@@ -1,0 +1,94 @@
+﻿@model OpenData.WebUI.Models.TableViewModel
+
+@{
+
+ViewBag.Title = "аа";
+Layout = "~/Views/Shared/_TableLayout.cshtml";
+
+}
+
+<div class="row">
+    <div class="medium-9 medium-push-3 columns">
+        <h1 class="dataset-title">@Model.OpenDataSet.Description</h1>
+        
+    </div>
+    <aside class="left medium-3 columns medium-pull-9 hide-for-small">
+        <span>@Model.OpenDataSet.Authority.Name</span>
+         
+    </aside>
+</div>
+<div class="row">
+<aside class="left medium-3 columns">
+    <h4>Общая информация</h4>
+        
+    @{ Html.RenderAction("DataSetInfo", "Table", new {opendataset=Model.OpenDataSet }); }
+       
+    <h4>Атрибуты датасета</h4>
+    @{ Html.RenderAction("DataSetAttr", "Table", new { data = Model.Data }); }
+</aside>
+<div class="medium-9 columns" data-bind="with: app.dataset">
+<div class="row">
+    <div class="small-4 columns">
+        <h4>Просмотр данных</h4>
+    </div>
+    
+</div>
+        <section>
+            <div class="row dataset-table-container">
+                <div class="dataset-table-scroller">
+                    <table width="90%" align="center" class="border" id="datatable">
+                    <thead>
+                        <tr>
+                        @foreach (System.Data.DataColumn dataColumn in Model.Data.Columns) 
+                        { 
+                            <td>@dataColumn.Caption</td>
+    
+                        }
+
+                    </tr>
+                
+
+                    </thead>
+
+                    <tbody>
+                       @* <tr>
+                             @foreach (System.Data.DataColumn dataColumn in Model.Data.Columns)
+                             { 
+                                <td>@{ Html.RenderAction("SearchInput", "Table", new { RowName = dataColumn.Caption }); }</td>
+                             }
+                        </tr>
+                        @foreach (System.Data.DataRow dataRow in Model.Data.Rows)
+                        { 
+                            <tr>
+                            @foreach (var ar in dataRow.ItemArray)
+                            { 
+                            <td>@ar</td>
+                            }
+                            </tr>    
+                        }*@
+
+                    
+                    </tbody>
+                        <tfoot></tfoot>
+                   
+                    </table>
+                </div>
+
+                <div class="pager">
+                    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x , ODID = Model.OpenDataSet.ODID }))
+                </div>
+
+                <p align="center" class="actionButtons">
+                    <a href="/">Назад</a>
+                   
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/datatables")
+
+<script src="~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+ 

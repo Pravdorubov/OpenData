@@ -1,0 +1,14 @@
+﻿@model System.Data.DataTable
+
+<section>
+    <ul class="checklist">
+    
+       @foreach (System.Data.DataColumn c in Model.Columns) 
+       {
+        <li class="checkbox_container">
+            @c.Caption       
+        </li>
+       }
+        
+    </ul>
+</section>

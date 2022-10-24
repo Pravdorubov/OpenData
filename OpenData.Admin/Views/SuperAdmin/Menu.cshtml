@@ -1,0 +1,26 @@
+﻿<fieldset name="Users" >
+    <legend>Работа с пользователями</legend>
+    <ul>
+        <li>@Html.RouteLink("Создать администратора ОИГВ", new { controller="SuperAdmin",action="CreateAuthorityAdmin" })</li>
+        <li>@Html.RouteLink("Создать оператора набора данных", new { controller = "SuperAdmin", action = "CreateOperator" })</li>
+        <li>@Html.RouteLink("Изменить профиль администратора ОИГВ", new { controller = "SuperAdmin", action = "UserList", RoleID=2 })</li>
+        <li>@Html.RouteLink("Изменить профиль оператора набора данных", new { controller = "SuperAdmin", action = "UserList",RoleID=3 })</li>
+    </ul>
+</fieldset>
+
+<fieldset name="DataSets" >
+    <legend>Работа с наборами данных</legend>
+    <ul>
+        <li>@Html.RouteLink("Создать набор данных", new { controller = "SuperAdmin", action = "CreateDataSet" })</li>
+        <li>@Html.RouteLink("Редактировать пасспорт набора данных", new { controller = "SuperAdmin", action = "EditDataSetPass" })</li>
+        <li>@Html.RouteLink("Обновить набор данных / Исправить ошибку", new { controller = "SuperAdmin", action = "EditDataSetData" })</li>
+        <li>@Html.RouteLink("Изменитть структуру набора данных", new { controller = "SuperAdmin", action = "EditDataSetStructure" })</li>
+    </ul>
+</fieldset>
+
+<fieldset name="Own" >
+    <legend>Работа со своим профилем</legend>
+    <ul>
+        <li>@Html.RouteLink("Редактировать профиль", new { controller = "SuperAdmin", action = "EditProfile" })</li>
+    </ul>
+</fieldset>

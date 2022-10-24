@@ -1,0 +1,85 @@
+﻿<div id="map" style="width:600px;height:400px"></div>
+testdsfds
+<script type="text/javascript">
+        //window.onload = function () {
+        $(document).ajaxComplete (function (){
+            
+            ymaps.ready(function () {
+                alert("sdfds");
+                // Создание экземпляра карты
+                var myMap = new maps.Map('map', {
+                    center: [59.224024, 39.883923],
+                    zoom: 12
+                });
+                // Загрузка YMapsML-файла
+                ymaps.geoXml.load("@ViewBag.ODID")
+                     .then(function (res) {
+                         myMap.geoObjects.add(res.geoObjects    ); // Добавление геообъектов на карту
+                     },
+                     function (error) {   // Вызывается в случае неудачной загрузки YMapsML-файла
+                         alert("При загрузке YMapsML-файла произошла ошибка: " + error);
+                     });
+            });
+        });
+</script>
+@*<script type="text/javascript">
+
+    // Set link on map by string address
+    function setLink(cordX, cordY, label, workHours, style) {
+        // Поиск координат
+       
+        var myPlacemark = new ymaps.Placemark([cordX, cordY], {
+            // Свойства
+            // Текст метки
+            //iconContent: label
+            iconContent: label,
+            balloonContentHeader: label,
+            balloonContentBody: workHours,
+            balloonContentFooter: ''
+        }, {
+            // Опции
+            // Иконка метки будет растягиваться под ее контент
+            preset: style
+        });
+            myMap.geoObjects.add(myPlacemark);
+        
+    }
+
+    // Как только будет загружен API и готов DOM, выполняем инициализацию
+    ymaps.ready(init);
+
+    function init() {
+        myMap = new ymaps.Map("myMap", {
+            center: [54.31, 48.41],
+            zoom: 10
+        });
+        myMap.controls
+        // Кнопка изменения масштаба
+                .add('zoomControl')
+        // Список типов карты
+                .add('typeSelector')
+        // Кнопка изменения масштаба - компактный вариант
+        // Расположим её справа
+                .add('smallZoomControl', { right: 5, top: 75 })
+        // Стандартный набор кнопок
+                .add('mapTools');
+
+        // Также в метод add можно передать экземпляр класса, реализующего определенный элемент управления.
+        // Например, линейка масштаба ('scaleLine')
+        myMap.controls
+                .add(new ymaps.control.ScaleLine())
+        // В конструкторе элемента управления можно задавать расширенные
+        // параметры, например, тип карты в обзорной карте
+                .add(new ymaps.control.MiniMap({
+                    type: 'yandex#publicMap'
+                }));
+        setLink('@Model.SearchAddress', 'Указанный адрес', '', 'twirl#redStretchyIcon');
+        $.getJSON('@Url.Action("GetDataMap", "Maps", new { })',
+                   function (data) {
+                       for (var key in data.returnedData) {
+                           // Создаем метку. При создании метки указываем ее свойство -  текст для отображения в иконке.
+                           setLink(data.returnedData[key].cordX,data.returnedData[key].cordY, data.returnedData[key].name, data.returnedData[key].workHours, 'twirl#blueStretchyIcon');
+                       }
+                   });
+    }
+</script>*@

@@ -1,0 +1,72 @@
+﻿@model OpenData.Domain.Entities.OpenDataSet
+@{
+    string linkToCSV = Model.ODID + ".csv";
+}
+
+@*<div class="item">
+   
+</div>*@
+    
+<tr>
+<td>@ViewBag.Num</td>
+    <td>@if (Model.ImageData != null)
+    { 
+       <img width="32" height="32" src="@Url.Action("GetImage","OpenDataSet",new {Model.ODID})"/> 
+        @*<div style="float:left;margin-right:20px" > 
+            
+        </div>*@
+    }
+    </td>
+    <td>
+    @Model.Name
+    </td>
+    <td>
+    @Model.Description
+    </td>
+    <td>
+    @Model.Category.Name
+    </td>
+    <td>
+    @Model.User.Authority.Name
+    </td>
+    <td>
+    @Html.DisplayFor(pub=>pub.IsPublished)
+    </td>
+    <td>
+   
+
+@*    @helper LinkToCSV(string linkCSV)
+ {
+    <a href="~/CSV/@linkCSV"+".cs">Скачать csv-файл </a> 
+ }
+
+  @LinkToCSV(Model.ODID)
+
+
+@helper Email(string address, string name = null)
+ {
+   <a href="mailto:@(address)">@(name ?? address)</a>  
+ }
+
+ и используем @Email("google@gmail.ru")*@
+
+    <a href="~/CSV/@linkToCSV">Скачать csv-файл </a> 
+
+    @*@using (Html.BeginForm("ViewCSV", "Table")) {
+        @Html.HiddenFor(x => x.ODID)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+       
+        
+        
+        <input type="submit" value="Cкачать csv-файл" />
+    }*@
+        
+    @using (Html.BeginForm("Index", "Table","Table" ))
+    {
+        @Html.HiddenFor(x => x.ODID)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" value="Просмотреть как таблицу" />
+    }
+    
+        </td>
+</tr>

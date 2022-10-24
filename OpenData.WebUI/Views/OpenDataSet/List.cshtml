@@ -1,0 +1,89 @@
+﻿@model OpenData.WebUI.Models.OpenDataSetsListViewModel
+
+@{
+    ViewBag.Title = "Портал открытых данных Вологодской области";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+   
+<table width="100%">
+        @*<caption><h3>РЕЕСТР НАБОРОВ ОТКРЫТЫХ ДАННЫХ</h3></caption>*@
+    <thead style="border-bottom:1px solid;">
+        <tr>
+            <th>№</th>
+            <th colspan="2">На</th>
+            <th>Категория</th>
+            <th>ОИГВ</th>
+            <th></th>
+       </tr>
+        
+   </thead>
+        <tbody id="datasets_table">
+            
+     @* @{
+          int count = (Model.PagingInfo.CurrentPage-1)*Model.PagingInfo.ItemsPerPage;
+      }  
+    
+@foreach (var p in Model.OpenDataSets)
+{
+    ViewBag.Num =++count;
+    Html.RenderPartial("OpenDataSummary", p);
+}*@
+            @*@Html.Action("AjaxList","OpenDataSet",
+    
+*@</tbody>
+</table>
+    
+
+<script type="text/javascript">
+
+
+
+    var app = window.app || {};
+        app.root = "/";
+        $(function () {
+            $('#text').placeholder();
+            $('#text').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Search/GetCaptions/",
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { query: $('#text').val() },
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    id:item.Id,
+                                    label: item.Caption+" ("+item.Type+")",
+                                    value: item.Caption + " (" + item.Type + ")",
+                                    controller: item.Controller
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+                    $('#text').val(ui.item.label);
+                    var locationHref= "/";
+                    
+                    switch(ui.item.controller)
+                    {
+                      
+                        case "services":
+                            location.href = locationHref + ui.item.controller;
+                            break;
+                        default:
+                            location.href = locationHref + ui.item.controller+"/"+ui.item.id;
+                            break;
+                    }
+                }
+            });
+
+        });
+    </script>
+@*<div class="pager">
+    tytyu
+   @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, categoryId = Model.CurrentCategoryID, authorityId=Model.CurrentAuthorityID }))
+</div>*@

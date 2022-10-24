@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "show2";
+    Layout = "~/Views/Shared/_TableLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="jquery.datatables.yadcf.css" rel="stylesheet" type="text/css" />
+
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script src="jquery.dataTables.yadcf.js"></script>*@
+
+<script src="~/Scripts/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.3.min.js"></script>
+<script src="~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.columnFilter.js"></script>
+<script src="~/Scripts/jquery.dataTables.yadcf.js"></script>
+<style>
+.label {
+  padding: 0px 10px 0px 10px;
+	border: 1px solid #ccc;
+	-moz-border-radius: 1em; /* for mozilla-based browsers */
+	-webkit-border-radius: 1em; /* for webkit-based browsers */
+	border-radius: 1em; /* theoretically for *all* browsers*/
+}
+
+.label.lightblue {
+	background-color: #99CCFF;
+}
+
+#external_filter_container_wrapper {
+  margin-bottom: 20px;
+}
+
+#external_filter_container {
+  display: inline-block;
+}
+</style>  
+    @{
+        string filesrc = "/Scripts/Yadcf/" + ViewBag.ODID + ".js";
+    <script src=@filesrc></script>
+    }
+    @*<script type="text/javascript">$(document).ready(function () { $('#userTable').dataTable({ 'sDom': 'rt', 'bJQueryUI': true, 'sPaginationType': 'full_numbers', 'bProcessing': true, 'bServerSide': true, 'sAjaxSource': '/Table/GetDataTables', 'fnServerData': function (url, data, callback) { $.ajax({ 'url': url, 'data': data, 'success': callback, 'dataType': 'json', 'type': 'POST', 'cache': false, 'error': function () { alert('DataTableswarning:JSONdatafromserverfailedtoloadorbeparsed.' + 'ThisismostlikelytobecausedbyaJSONformattingerror.'); } }); } }); });</script>*@
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        //http://www.datatables.net
+        $('#userTable').dataTable({
+            "sDom": "rt",
+            "bJQueryUI": true,
+            "sPaginationType": "full_numbers",
+            "bProcessing": true,
+            "bServerSide": true,
+            "sAjaxSource": "/Table/GetDataTables",
+            "fnServerData": function (url, data, callback) {
+                $.ajax({
+                    "url": url,
+                    "data": data,
+                    "success": callback,
+                    "dataType": "json",
+                    "type": "POST",
+                    "cache": false,
+                    "error": function () {
+                        alert("DataTables warning: JSON data from server failed to load or be parsed. " +
+						"This is most likely to be caused by a JSON formatting error.");
+                    }
+                });
+            }
+        });
+    });
+</script>*@
+
+<meta charset=utf-8 />
+<title>yadcf - Yet Another DataTables Column Filter</title>
+</head>
+ <body id="yadcf_example">
+    <div id="container">
+      <h1>Yet Another DataTables Column Filter - (yadcf) example</h1>
+      <div id="external_filter_container_wrapper">
+        <label>External filter for "Numbers" column :</label>
+        <div id="external_filter_container"></div>
+      </div>
+        <table id="datatable" width="100%">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Address</td>
+                    <td>X</td>
+                    <td>Y</td>
+                    <td>DISTRICT</td>
+                    <td>AREA</td>
+                    <td>FAX</td>
+                    <td>EMAIL</td>
+                    <td>WEB_SITE</td>
+                    <td>GLOBALID</td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                
+            </tfoot>
+        </table>
+
+    </div>
+  </body>
+</html>

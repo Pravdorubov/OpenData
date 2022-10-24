@@ -1,0 +1,115 @@
+﻿@model IEnumerable<OpenData.Domain.Entities.cat_Category>
+
+@*@Html.ActionLink("Выбрать все категории", "List", "OpenDataSet", new { categoryId = -1 }, new { @class = "menu_head" })
+@Html.ActionLink("Убрать все категории", "List", "OpenDataSet", new { categoryId = -2 }, new { @class = "menu_head" })*@
+
+
+@{
+    List<int> sel = TempData["MenuCat"] as List<int>;
+    
+}
+   
+    @Ajax.ActionLink("Выбрать всё", "AjaxList", "OpenDataSet", new AjaxOptions
+    {
+        Url = Url.Action("AjaxList", "OpenDataSet", new
+        {
+            action = "List",
+            categoryId = -1,
+            authorityId = 0,
+            page = 1
+        }),
+        UpdateTargetId = "datasets_table",
+        OnSuccess = "check_all_cat()"
+    },
+    new { @class = "checkall" }
+
+    )
+    
+        @Ajax.ActionLink("Убрать всё", "AjaxList", "OpenDataSet", new AjaxOptions
+    {
+        Url = Url.Action("AjaxList", "OpenDataSet", new
+        {
+            action = "List",
+            categoryId = -2,
+            authorityId = 0,
+            page = 1
+        }),
+        UpdateTargetId = "datasets_table",
+        OnSuccess = "cross_all_cat()"
+    },
+    new { @class = "uncheckall" }
+
+    )
+    
+
+@*@foreach (var link in Model)
+{
+  @Html.RouteLink(link.Name, new
+    {
+        controller = "OpenDataSet",
+        action = "List",
+        categoryId = link.ID,
+        authorityINN=0,
+        page = 1
+    },
+    new { 
+        @class = sel.Exists(s=>s==link.ID)  ? "selected" :null
+    })
+}*@
+
+@foreach (var link in Model)
+{
+  
+    @Ajax.ActionLink(link.Name,"Ajax","OpenDataSet",
+        new AjaxOptions
+        {
+            Url=Url.Action("AjaxList","OpenDataSet", new {
+            categoryID=link.ID,
+            authorityId = 0,
+            page = 1
+        }),         
+            UpdateTargetId = "datasets_table",
+           
+            //Confirm="ads"
+        },
+        new 
+        {
+            @class = sel.Exists(s => s == link.ID) ? "check selected" : "check"
+            //onclick = "changeSelection()"    
+        }
+    )
+}
+
+@*@Ajax.ActionLink("Убрать все категории", "AjaxList", "OpenDataSet", new AjaxOptions
+    {
+        Url = Url.Action("AjaxList", "OpenDataSet", new
+        {
+            action = "List",
+            categoryId = -2,
+            authorityId = 0,
+            page = 1
+        }),
+        UpdateTargetId = "datasets_table",
+    },
+    new { @class = "menu_head" }
+
+    )*@
+
+
+@{
+    TempData["MenuCat"] = sel;    
+}
+
+<script> 
+    function check_all_cat()
+    {
+        
+        $("#CatDiv a.check").addClass("selected");
+    }
+
+    function cross_all_cat() {
+        
+        $("#CatDiv a.check").removeClass("selected");
+    }
+
+</script>

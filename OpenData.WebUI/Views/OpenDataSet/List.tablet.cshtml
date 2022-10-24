@@ -1,0 +1,32 @@
+﻿@model OpenData.WebUI.Models.OpenDataSetsListViewModel
+@{
+    ViewBag.Title = "List.tablet";
+    Layout = "~/Views/Shared/_MainLayout.tablet.cshtml";
+}
+
+<table width="100%">
+        @*<caption><h3>РЕЕСТР НАБОРОВ ОТКРЫТЫХ ДАННЫХ</h3></caption>*@
+    <thead style="border-bottom:1px solid;">
+        <tr>
+            <th>№</th>
+            <th colspan="2">Наименование</th>
+            <th>Категория</th>
+            <th>ОИГВ</th>
+            <th></th>
+       </tr>
+        
+   </thead>
+        <tbody>
+            
+      @{
+          int count = (Model.PagingInfo.CurrentPage-1)*Model.PagingInfo.ItemsPerPage;
+      }  
+    
+@foreach (var p in Model.OpenDataSets)
+{
+    ViewBag.Num =++count;
+    Html.RenderPartial("OpenDataSummary", p);
+}
+    
+</tbody>
+</table>

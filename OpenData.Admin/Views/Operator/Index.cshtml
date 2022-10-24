@@ -1,0 +1,9 @@
+﻿@model OpenData.Domain.Entities.User
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_OperatorLayout.cshtml";
+    
+}
+
+
+<h4>Вы зашли как: @Model.UserProfile.FNS, @Model.UserProfile.Duty, @Model.UserProfile.Authority.Name</h4>

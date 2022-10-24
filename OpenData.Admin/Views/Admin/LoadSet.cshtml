@@ -1,0 +1,32 @@
+﻿@model OpenData.Admin.Models.LoadSetModel
+
+@{
+    ViewBag.Title = "LoadSet";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h2>@Model.ODID</h2> @Model.ReturnUrl*@
+
+ @using (Html.BeginForm("LoadSet","Admin", 
+        FormMethod.Post, new { enctype = "multipart/form-data" })) {
+        @Html.HiddenFor(x => x.ODID);
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <h3>Загрузка набора данных для</h3>@Html.DisplayFor(x=>x.ODID);
+        <input Name="ScemeMimeType" type="hidden" id="SchemeMimeType" value="text/csv"/>
+        <div class="editor-label">Файл структуры</div>
+        <div class="editor-field">
+        <div>Загрузка файла структуры: <input type="file" name="SchemeFile" id="SchemeFile" /></div>
+        </div>
+        <input Name="CsvMimeType" type="hidden" id="CsvMimeType" value="text/csv"/>
+        <div class="editor-label">CSV-файл</div>
+        <div class="editor-field">
+        <div>Загрузка CSV-файла: <input type="file" name="CSVFile" id="CSVFile" /></div>
+
+        </div>
+    <input type="submit" value="Save" />
+   
+    }
+ @Html.ActionLink("Отменить и вернуться в список","Return", "SuperAdmin")
+
+
+ 

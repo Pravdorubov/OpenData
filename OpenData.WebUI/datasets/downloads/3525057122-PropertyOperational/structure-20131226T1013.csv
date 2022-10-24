@@ -1,0 +1,11 @@
+field name;english description;russian description;format
+Row_NUM;Number;№ п/п;string
+Reg_NUM;Reg Number;Реестр. №;string
+Name;Name;Наименование юридического лица, за которым закреплено имущество области ;string
+Balance;Balance Value;Балансовая стоимость основных средств, тыс. руб.;string
+Rest;Rest Value;Остаточная стоимость основных средств, тыс. руб.;string
+ContrInProgr;Contruction In Progress;Незавершенное строительство (размер затрат), тыс.руб.;string
+Inventories;Inventories;Материальные запасы, тыс.руб.;string
+LT_Invest;Long Term Investments;Долгосрочные финансовые вложения, тыс.руб.;string
+I_ assets;Intangible assets;Нематериальные активы, тыс.руб.;string
+Others;Others;Иные активы, тыс.руб.;string

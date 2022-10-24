@@ -1,0 +1,14 @@
+﻿@Html.TextBox("searcher", 
+	null, 
+	new { data_autocomplete = @Url.Content("/site/search/") })
+@Html.ScriptBlock(
+@<script 
+	type="text/javascript" 
+	src="@Url.Content("/scripts/search.mvc.helpers.js")">
+</script>)
+ 
+@Html.ScriptBlock(
+@<script 
+	type="text/javascript" 
+	src="@Url.Content("/scripts/jquery.blockUI.js")">
+</script>)

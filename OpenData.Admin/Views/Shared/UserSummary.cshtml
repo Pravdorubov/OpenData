@@ -1,0 +1,23 @@
+﻿@model OpenData.Admin.Models.UserView    
+
+@{
+    Layout = null;
+}
+
+<tr>
+<td>@ViewBag.Num</td>
+    <td>
+    @Model.FNS
+    </td>
+    <td>
+    @Model.Authority
+    </td>
+    <td>
+    @Model.Login
+    </td>
+    <td>
+    @Html.ActionLink("Редактировать атрибуты", "EditUserProfile", new {Id= Model.ID })
+    </td>
+   
+   
+</tr>

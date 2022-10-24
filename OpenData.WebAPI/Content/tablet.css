@@ -1,0 +1,273 @@
+﻿BODY
+{
+  font-family: Cambria, Georgia, "Times New Roman";
+  margin: 0;
+}
+
+DIV#header DIV.title, DIV.item H3, DIV.item H4, DIV.pager A
+{
+  font: bold 1em "Arial Narrow", "Franklin Gothic Medium", Arial;
+}
+
+th 
+{
+    background-color:#ededed;
+    text-align:left;
+    padding:3px 0;
+}
+
+DIV#header
+{
+  background-color: #444;
+  border-bottom: 2px solid #111;
+  color: White;
+}
+
+DIV#header DIV.title
+{
+font-size: 2em;
+padding: .6em;
+}
+
+DIV#content
+{
+  border-left: 2px solid gray;
+  margin-left: 9em;
+  padding: 1em;
+}
+
+DIV#categories, DIV#oigv
+{
+  float: left;
+  width: 15em;
+  padding: .3em;
+}
+
+
+
+
+DIV.item
+{
+  border-top: 1px dotted gray;
+  padding-top: .7em;
+  margin-bottom: .7em;
+}
+
+DIV.item:first-child
+{
+    border-top: none;
+    padding-top: 0;
+}
+
+DIV.item H3
+  {
+    font-size: 1.3em;
+    margin: 0 0 .25em 0;
+  }
+
+DIV.item H4
+{
+font-size: 1.1em;
+margin: .4em 0 0 0;
+}
+
+DIV.pager
+{
+  text-align: right;
+  border-top: 2px solid silver;
+  padding: .5em 0 0 0;
+  margin-top: 1em;
+}
+
+DIV.pager A
+{
+font-size: 1.1em;
+color: #666;
+text-decoration: none;
+padding: 0 .4em 0 .4em;
+}
+
+DIV.pager A:hover
+{
+    background-color: Silver;
+}
+
+DIV.pager A.selected
+{
+    background-color: #353535;
+    color: White;
+}
+
+DIV#categories A, DIV#oigv A
+{
+  font: bold  "Arial Narrow","Franklin Gothic Medium",Arial; display: block;
+  text-decoration: none; padding: .6em; color: Black;
+  border-bottom: 1px solid silver;
+}
+DIV#categories A.selected, DIV#oigv A.selected { 
+    background-color: #666; 
+    color: White; 
+}
+DIV#categories A:hover, DIV#oigv A:hover { 
+    background-color: #CCC; 
+}
+DIV#categories A.selected:hover, DIV#oigv A.selected:hover { 
+    background-color: #666; 
+}
+FORM { 
+    margin: 0; 
+    padding: 0; 
+}
+DIV.item FORM { 
+    float:right; 
+}
+DIV.item INPUT {
+    color:White; 
+    background-color: #333; 
+    border: 1px solid black; 
+    cursor:pointer;
+}
+H2 { 
+    margin-top: 0.3em 
+}
+TFOOT TD { 
+    border-top: 1px dotted gray; 
+    font-weight: bold; 
+}
+.actionButtons A, INPUT.actionButtons {
+    font: .8em Arial; 
+    color: White; 
+    margin: .5em;
+    text-decoration: none; 
+    padding: .15em 1.5em .2em 1.5em;
+    background-color: #353535; 
+    border: 1px solid black;
+}
+
+DIV#cart { 
+    float:right; 
+    margin: .8em; 
+    color: Silver;
+    background-color: #555; 
+    padding: .5em .5em .5em 1em; 
+}
+DIV#cart A { 
+    text-decoration: none; 
+    padding: .4em 1em .4em 1em; 
+    line-height:2.1em;
+    margin-left: .5em; 
+    background-color: #333; 
+    color:White; 
+    border: 1px solid black;
+}
+
+DIV#categories A.menu_head, DIV#oigv A.menu_head 
+{
+    font-size:large;
+}
+
+table.border td, td.border
+{
+    border:1px solid gray;
+}
+
+.odd td{
+    background:#fff;
+}
+
+.even td{
+    background:#ededed;
+}
+
+td.name {
+    font-weight:bolder;
+}
+
+td {
+    padding: 2px;
+}
+
+header .row {
+    background: url(../img/logo.tablet.jpg) no-repeat ;
+    -webkit-background-size: 100%;
+-o-background-size: 100%;
+-moz-background-size: 100%;
+-ms-background-size: 100%;
+-khtml-background-size: 100%;
+background-size: 100%;
+    min-height:200px;
+    max-height:500px;
+}
+
+
+
+header .search {
+    float:right;
+}
+
+#CatSpan, #AuthSpan {
+    text-decoration: underline;
+    font-size: smaller;
+    float:right;
+}
+
+#CatSpan:hover, #AuthSpan:hover {
+    cursor:pointer;
+}
+
+div#Nav {
+    /*position:absolute;
+    left:705px;*/
+    float:right;
+    margin-right:20px;
+}
+
+ul#tabs {
+   
+    list-style:none;
+    height:30px;
+    display:table;
+    width: 100%;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+
+ul#tabs li{
+    float:left;
+    display: table-cell;
+    padding-bottom: 1px;
+    padding-left: 0px;
+    padding-right: 1px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    width:184px;
+}
+
+ul#tabs li a{
+    background-color: #B5111B;
+    color: #FFFFFF;
+    display: block;
+    font-size: 0.9em;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+ul#tabs li a:hover,ul#tabs li a.selected{
+    background-color: #222222;
+}

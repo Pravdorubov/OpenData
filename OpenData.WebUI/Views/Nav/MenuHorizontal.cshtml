@@ -1,0 +1,17 @@
+﻿@model string []
+
+@{
+    Layout = null;
+}
+
+@foreach (var link in Model)
+{
+  @Html.RouteLink(link, new
+    {
+        controller = "OpenDataSet",
+        action = link,
+    },
+    new { 
+        @class = link == ViewBag.SelectedLink? "selected" :null
+    })
+}

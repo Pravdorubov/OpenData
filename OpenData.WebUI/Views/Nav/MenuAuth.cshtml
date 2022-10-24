@@ -1,0 +1,100 @@
+﻿@*@model IEnumerable<string>*@
+@model IEnumerable<OpenData.Domain.Entities.Authority>
+
+@*@Html.ActionLink("Выбрать все ОИГВ", "List", "OpenDataSet", new { authorityId = -1 }, new { @class = "menu_head" })
+@Html.ActionLink("Убрать все ОИГВ", "List", "OpenDataSet", new { authorityId = -2 }, new { @class = "menu_head" })*@
+
+
+@{
+    List<int> sel = TempData["MenuAuth"] as List<int>;
+}
+
+ @Ajax.ActionLink("Выбрать всё", "AjaxList", "OpenDataSet", new AjaxOptions
+    {
+        Url = Url.Action("AjaxList", "OpenDataSet", new
+        {
+            action = "List",
+            categoryId = 0,
+            authorityId = -1,
+            page = 1
+        }),
+        UpdateTargetId = "datasets_table",
+        OnSuccess = "check_all_auth()"
+    },
+    new { @class = "checkall" }
+
+    )
+    
+        @Ajax.ActionLink("Убрать всё", "AjaxList", "OpenDataSet", new AjaxOptions
+    {
+        Url = Url.Action("AjaxList", "OpenDataSet", new
+        {
+            action = "List",
+            categoryId = 0,
+            authorityId = -2,
+            page = 1
+        }),
+        UpdateTargetId = "datasets_table",
+        OnSuccess = "cross_all_auth()"
+    },
+    new { @class = "uncheckall" }
+
+    )
+
+
+@foreach (var link in Model)
+{
+  
+    @Ajax.ActionLink(link.Name, "Ajax", "OpenDataSet",
+        new AjaxOptions
+        {
+            Url = Url.Action("AjaxList", "OpenDataSet", new
+            {
+                categoryID = 0,
+                authorityId = link.ID,
+                page = 1
+            }),
+            UpdateTargetId = "datasets_table"
+            //Confirm="ads"
+        }
+            ,
+             new
+             {
+                 @class = sel.Exists(s => s == link.ID) ? "check selected" : "check"
+             }
+    )
+}
+
+@{
+    TempData["MenuAuth"] = sel;    
+}
+
+@*@foreach (var link in Model)
+{
+  
+    @Html.RouteLink(link.Name, new
+    {
+        controller = "OpenDataSet",
+        action = "List",
+        categoryID=0,
+        authorityINN = link.INN,
+        page = 1
+    },
+    new { 
+        @class = sel.Exists(s=>s==link.INN) ? "selected" :null
+    })
+}*@
+
+<script> 
+    function check_all_auth()
+    {
+        
+        $("#AuthDiv a.check").addClass("selected");
+    }
+
+    function cross_all_auth() {
+        
+        $("#AuthDiv a.check").removeClass("selected");
+    }
+
+</script>
